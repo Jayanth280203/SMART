@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template, session
 from flask_cors import CORS
+from pymongo import MongoClient
 import pandas as pd
 import joblib
 import numpy as np
@@ -8,6 +9,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 import io
+
 try:
     import google.generativeai as genai
     _GENAI_AVAILABLE = True
@@ -20,12 +22,21 @@ try:
 except ImportError:
     pdfplumber = None
     docx = None
+
 app = Flask(__name__, 
             template_folder='templates',
             static_folder='static',
             static_url_path='')
 CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}}) # Multi-device compatible CORS
 app.secret_key = 'supersecretkey_for_final_project'
+
+# --- CLOUD DATABASE (AWS MongoDB Atlas) ---
+MONGO_URI = "mongodb+srv://jayanthr239_db_user:U37kOH0GvVwaTXxF@cluster0.duhyvxx.mongodb.net/?appName=Cluster0"
+client = MongoClient(MONGO_URI)
+mongo_db = client['smart_erp']
+students_col = mongo_db['students']
+employers_col = mongo_db['employers']
+print("Connected to AWS MongoDB Atlas successfully.")
 
 # --- NEW ANALYZER MODULES ---
 from resume_parser import ResumeParser
@@ -405,34 +416,31 @@ def index():
 def signup_employee():
     global master_df
     data = request.json
-    db = pd.read_csv(USER_DB)
+    umis = str(data.get('UMIS number'))
     
-    # Verification
-    if str(data.get('UMIS number')) in db['UMIS number'].astype(str).values:
+    # Verification using MongoDB
+    if students_col.find_one({"UMIS number": umis}):
         return jsonify({"status": "error", "message": "UMIS already exists"}), 400
     
     # Map the incoming exact names into user_data expected by get_predictions
-    # If the JSON sends exactly the same names (which it does), get_predictions works directly.
     ac_role, sk_role = get_predictions(data)
     
-    # Data to append to USER_DB
+    # Data to save
     user_row = data.copy()
     user_row['predicted_academic_job_role'] = ac_role
     user_row['predicted_skill_job_role'] = sk_role
     
-    pd.DataFrame([user_row]).to_csv(USER_DB, mode='a', header=False, index=False)
+    # Save to MongoDB
+    students_col.insert_one(user_row)
     
-    # Data to append to MASTER_DATASET (exclude pin)
+    # Optional: For analytics to stay fast, we still append to the local MASTER_DATASET 
+    # so employer dashboard doesn't have to query cloud DB for every tile
     master_row = user_row.copy()
-    if 'pin' in master_row:
-        del master_row['pin']
+    if '_id' in master_row: del master_row['_id']
+    if 'pin' in master_row: del master_row['pin']
         
     master_row_df = pd.DataFrame([master_row])
-    
-    # Make sure columns align with MASTER_DATASET!
-    # A simple way is to match columns to master_df
     cols = master_df.columns
-    # Any missing columns filled with 'NONE'
     for col in cols:
         if col not in master_row_df or str(master_row_df[col].values[0]).strip() == "":
             master_row_df[col] = 'NONE'
@@ -445,7 +453,7 @@ def signup_employee():
     
     return jsonify({
         "status": "success", 
-        "umis": data.get('UMIS number'),
+        "umis": umis,
         "academic": ac_role,
         "skill": sk_role
     })
@@ -453,30 +461,32 @@ def signup_employee():
 @app.route('/api/login/employee', methods=['POST'])
 def login_employee():
     data = request.json
-    db = pd.read_csv(USER_DB)
+    umis = str(data.get('umis'))
+    dob = str(data.get('dob')).strip().replace("-", "")
     
-    # Check if UMIS exists
-    user_umis = db[db['UMIS number'].astype(str) == str(data['umis'])]
-    if user_umis.empty:
+    # Check MongoDB
+    user = students_col.find_one({"UMIS number": umis})
+    if not user:
         return jsonify({"status": "error", "message": "UMIS does not exist. Please sign up."}), 404
         
     # Check password/DOB
-    input_dob = str(data['dob']).strip().replace("-", "")
-    user = user_umis[user_umis['dob'].astype(str).str.strip().str.replace("-", "") == input_dob]
-    if not user.empty:
-        session['user_id'] = str(data['umis'])
+    stored_dob = str(user.get('dob', '')).strip().replace("-", "")
+    if stored_dob == dob:
+        session['user_id'] = umis
         session['role'] = 'employee'
-        user_dict = user.fillna("").to_dict(orient='records')[0]
-        return jsonify({"status": "success", "user": user_dict})
+        user['_id'] = str(user['_id']) # JSON serializable
+        return jsonify({"status": "success", "user": user})
     
     return jsonify({"status": "error", "message": "Incorrect Password (DOB)"}), 401
 
 def sanitize_data(obj):
-    """Convert numpy types to native Python types for JSON serialization"""
+    """Convert MongoDB and numpy types to native Python types for JSON serialization"""
     if isinstance(obj, dict):
         return {k: sanitize_data(v) for k, v in obj.items()}
     elif isinstance(obj, list):
         return [sanitize_data(i) for i in obj]
+    elif str(type(obj)).find('bson.objectid.ObjectId') != -1:
+        return str(obj)
     elif hasattr(obj, 'item'): 
         try: return obj.item()
         except: return str(obj)
@@ -489,15 +499,14 @@ def sanitize_data(obj):
 @app.route('/api/dashboard/employee/<umis>')
 def employee_dashboard(umis):
     try:
-        db = pd.read_csv(USER_DB).fillna("")
-        user_rows = db[db['UMIS number'].astype(str) == str(umis)].to_dict(orient='records')
-        if not user_rows:
+        # Fetch from MongoDB
+        user_data = students_col.find_one({"UMIS number": str(umis)})
+        if not user_data:
             return jsonify({"error": "User not found"}), 404
-        user_data = user_rows[0]
         
         ac_role, sk_role = get_predictions(user_data)
         
-        # Gap Analysis: Compare with peers in master_df having same skill role
+        # Peer comparison still uses master_df for speed
         peers = master_df[master_df['predicted_skill_job_role'] == sk_role]
         try:
             avg_cgpa = float(peers['cgpa'].mean()) if len(peers) > 0 else 7.5
@@ -901,56 +910,32 @@ def _mock_jobs(role, location, work_type):
 def signup_employer():
     try:
         data = request.json
-        if not os.path.exists(EMPLOYER_DB):
-            init_dbs()
-            
-        db = pd.read_csv(EMPLOYER_DB, dtype=str)
+        email = str(data.get('email', '')).strip().lower()
         
-        # Check if email already exists
-        email = str(data.get('email')).strip().lower()
-        if 'email' in db.columns and email in db['email'].astype(str).str.lower().values:
+        # Check MongoDB
+        if employers_col.find_one({"email": email}):
             return jsonify({"status": "error", "message": "Email already registered"}), 400
         
-        # Ensure data is saved with correct columns
-        cols = ['full_name', 'email', 'password', 'mobile', 'company_name', 'company_type', 'industry_domain', 'head_office_city', 'reg_number', 'proof_file']
-        new_row = {c: data.get(c, '') for c in cols}
-        
-        pd.DataFrame([new_row]).to_csv(EMPLOYER_DB, mode='a', header=False, index=False)
+        # Add to MongoDB
+        employers_col.insert_one(data)
         return jsonify({"status": "success", "message": "Employer account created successfully"})
     except Exception as e:
-        print(f"Signup error: {e}")
         return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.route('/api/login/employer', methods=['POST'])
 def login_employer():
     try:
         data = request.get_json(silent=True) or {}
-        if not os.path.exists(EMPLOYER_DB):
-            init_dbs()
-            
-        try:
-            db = pd.read_csv(EMPLOYER_DB, dtype=str)
-        except Exception as e:
-            print(f"Dataset read error: {e}")
-            return jsonify({"status": "error", "message": "Database access error"}), 500
-        
-        # Check for email and password
         email = str(data.get('email', '')).strip().lower()
         password = str(data.get('password', '')).strip()
         
         if not email or not password:
              return jsonify({"status": "error", "message": "Email and Password are required"}), 400
 
-        # Filter manually if columns are missing or messy
-        if db.empty or 'email' not in db.columns:
-             return jsonify({"status": "error", "message": "No registered accounts found"}), 401
-             
-        user = db[(db['email'].astype(str).str.lower().str.strip() == email) & 
-                  (db['password'].astype(str).str.strip() == password)]
-                  
-        if not user.empty:
-            user_data = user.iloc[0].to_dict()
-            comp_name = user_data.get('company_name', 'Enterprise Partner')
+        # Check MongoDB
+        user = employers_col.find_one({"email": email, "password": password})
+        if user:
+            comp_name = user.get('company_name', 'Enterprise Partner')
             session['role'] = 'employer'
             session['email'] = email
             session['company'] = comp_name
@@ -958,8 +943,6 @@ def login_employer():
         
         return jsonify({"status": "error", "message": "Invalid Email or Password"}), 401
     except Exception as e:
-        import traceback
-        print(f"Login error traceback: {traceback.format_exc()}")
         return jsonify({"status": "error", "message": f"Server error: {str(e)}"}), 500
 
 @app.route('/api/hierarchy')
@@ -980,11 +963,10 @@ def get_all_roles():
 @app.route('/api/profile/employer/<email>')
 def get_employer_profile(email):
     try:
-        db = pd.read_csv(EMPLOYER_DB, dtype=str).fillna("NONE")
-        user = db[db['email'].astype(str).str.lower().str.strip() == email.strip().lower()]
-        if user.empty:
+        user = employers_col.find_one({"email": email.strip().lower()})
+        if not user:
             return jsonify({"error": "Employer not found"}), 404
-        return jsonify(user.to_dict(orient='records')[0])
+        return jsonify(sanitize_data(user))
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -993,17 +975,18 @@ def update_employer_profile():
     try:
         data = request.json
         original_email = str(data.get('original_email', '')).strip().lower()
-        db = pd.read_csv(EMPLOYER_DB, dtype=str)
         
-        idx = db[db['email'].astype(str).str.lower().str.strip() == original_email].index
-        if idx.empty:
+        # Pull original out to find the document
+        update_data = {k: v for k, v in data.items() if k != 'original_email'}
+        
+        result = employers_col.update_one(
+            {"email": original_email},
+            {"$set": update_data}
+        )
+        
+        if result.matched_count == 0:
             return jsonify({"status": "error", "message": "Employer not found"}), 404
             
-        for key, value in data.items():
-            if key in db.columns and key != 'original_email':
-                db.loc[idx, key] = value
-        
-        db.to_csv(EMPLOYER_DB, index=False)
         return jsonify({"status": "success"})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
@@ -1174,39 +1157,35 @@ def update_employee():
         data = request.json
         umis = str(data.get('UMIS number'))
         
-        # 1. Update USER_DB (Employee specific login store)
-        db_user = pd.read_csv(USER_DB)
-        if umis not in db_user['UMIS number'].astype(str).values:
+        # 1. Update Cloud MongoDB
+        user_data = students_col.find_one({"UMIS number": umis})
+        if not user_data:
             return jsonify({"status": "error", "message": "User not found"}), 404
             
-        update_mask = db_user['UMIS number'].astype(str) == umis
-        for key in data:
-            if key in db_user.columns:
-                db_user.loc[update_mask, key] = data[key]
-        
         # Re-predict roles since profile changed
-        user_row_dict = db_user.loc[update_mask].to_dict(orient='records')[0]
-        ac_role, sk_role = get_predictions(user_row_dict, force_recalc=True)
-        db_user.loc[update_mask, 'predicted_academic_job_role'] = ac_role
-        db_user.loc[update_mask, 'predicted_skill_job_role'] = sk_role
+        # We merge incoming data with existing data to ensure predictions have full context
+        merged_data = {**user_data, **data}
+        ac_role, sk_role = get_predictions(merged_data, force_recalc=True)
         
-        db_user.to_csv(USER_DB, index=False)
+        update_doc = {**data, 'predicted_academic_job_role': ac_role, 'predicted_skill_job_role': sk_role}
+        if '_id' in update_doc: del update_doc['_id']
         
-        # 2. Update MASTER_DATASET (The large 20MB file)
+        students_col.update_one({"UMIS number": umis}, {"$set": update_doc})
+        
+        # 2. Update local MASTER_DATASET for fast analytics
         master_data = pd.read_csv(MASTER_DATASET)
         if umis in master_data['UMIS number'].astype(str).values:
             master_mask = master_data['UMIS number'].astype(str) == umis
-            for key in data:
+            for key in update_doc:
                 if key in master_data.columns:
-                    master_data.loc[master_mask, key] = data[key]
-            
-            master_data.loc[master_mask, 'predicted_academic_job_role'] = ac_role
-            master_data.loc[master_mask, 'predicted_skill_job_role'] = sk_role
+                    master_data.loc[master_mask, key] = update_doc[key]
             master_data.to_csv(MASTER_DATASET, index=False)
-            master_df = master_data.copy() # Sync global variable
+            master_df = master_data.copy()
             
-        return jsonify({"status": "success", "message": "Profile updated dynamically!"})
+        return jsonify({"status": "success", "academic": ac_role, "skill": sk_role})
     except Exception as e:
+        import traceback
+        print(traceback.format_exc())
         return jsonify({"status": "error", "message": str(e)}), 500
 
 if __name__ == '__main__':
