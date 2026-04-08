@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  // Use 10.0.2.2 for Android Emulator, localhost for Web/Windows
-  static const String baseUrl = 'http://10.182.222.50:5000';
+  // Production URL - works everywhere even when laptop is off
+  static const String baseUrl = 'https://smart-zzhm.onrender.com';
 
   static Future<Map<String, dynamic>> loginEmployee(String umis, String dob) async {
     final response = await http.post(
