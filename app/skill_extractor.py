@@ -1,6 +1,11 @@
 import re
 import os
-import google.generativeai as genai
+try:
+    import google.generativeai as genai
+    _GENAI_AVAILABLE = True
+except ImportError:
+    genai = None
+    _GENAI_AVAILABLE = False
 
 class SkillExtractor:
     def __init__(self):
@@ -40,7 +45,7 @@ class SkillExtractor:
 
         # 2. Gemini-Powered Intelligence (Hidden Skills & NER)
         api_key = os.environ.get('GEMINI_API_KEY', '')
-        if api_key:
+        if api_key and _GENAI_AVAILABLE and genai is not None:
             try:
                 genai.configure(api_key=api_key)
                 model = genai.GenerativeModel('gemini-pro')
