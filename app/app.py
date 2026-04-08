@@ -40,10 +40,12 @@ scorer = ATSScorer()
 # Initialize matcher later with master_df
 matcher = None
 
-# Paths
-DATA_DIR = 'd:/FINAL_PROJECT/app/data'
-MASTER_DATASET = 'd:/FINAL_PROJECT/TN_Student_Skill_Dataset.csv'  
-MODEL_DIR = 'd:/FINAL_PROJECT/app'  # Changed from /models to /app
+# Paths — cross-platform (works on Windows locally + Render Linux)
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(APP_DIR)
+DATA_DIR = os.path.join(APP_DIR, 'data')
+MASTER_DATASET = os.path.join(BASE_DIR, 'TN_Student_Skill_Dataset.csv')
+MODEL_DIR = APP_DIR
 USER_DB = os.path.join(DATA_DIR, 'users.csv')
 EMPLOYER_DB = os.path.join(DATA_DIR, 'employers.csv')
 
@@ -101,7 +103,7 @@ cached_roles = sorted(list(set(skill_roles + academic_roles)))
 
 # Load additional roles for "1000+ jobs" requirement
 try:
-    with open('d:/FINAL_PROJECT/all_roles.json', 'r', encoding='utf-8') as f:
+    with open(os.path.join(BASE_DIR, 'all_roles.json'), 'r', encoding='utf-8') as f:
         extra_roles = json.load(f)
         cleaned_extra = []
         for r in extra_roles:
@@ -127,14 +129,14 @@ def get_cached_hierarchy():
     global cached_hierarchy
     if cached_hierarchy is None:
         try:
-            h_path = 'd:/FINAL_PROJECT/app/data/hierarchy.json'
+            h_path = os.path.join(APP_DIR, 'data', 'hierarchy.json')
             if os.path.exists(h_path):
                 with open(h_path, 'r') as f:
                     cached_hierarchy = json.load(f)
                     print(f"Loaded hierarchy from {h_path}")
             else:
                 # Fallback build from CSV
-                csv_path = 'd:/FINAL_PROJECT/tn_colleges_block_wise.csv'
+                csv_path = os.path.join(BASE_DIR, 'tn_colleges_block_wise.csv')
                 if os.path.exists(csv_path):
                     df = pd.read_csv(csv_path)
                     h = {}
