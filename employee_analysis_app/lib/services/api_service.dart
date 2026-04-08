@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 
 class ApiService {
-  // Production URL - works everywhere even when laptop is off
-  static const String baseUrl = 'https://smart-zzhm.onrender.com';
+  // Use relative path for Web (same origin), fixed URL for mobile apps
+  static String get baseUrl => kIsWeb ? '' : 'https://smart-zzhm.onrender.com';
 
   static Future<Map<String, dynamic>> loginEmployee(String umis, String dob) async {
     final response = await http.post(

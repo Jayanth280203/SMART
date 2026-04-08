@@ -35,7 +35,17 @@ class _EmployerLoginScreenState extends State<EmployerLoginScreen> {
       }
     } catch (e) {
       if (mounted) setState(() => _isLoading = false);
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Server unreachable'), backgroundColor: Color(0xFFF43F5E)));
+      if (mounted) {
+        String errMsg = e.toString();
+        if (errMsg.contains('XMLHttpRequest error')) {
+          errMsg = 'Network Exception: Please check your internet or server status.';
+        }
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Error: $errMsg'), 
+          backgroundColor: const Color(0xFFF43F5E),
+          duration: const Duration(seconds: 4),
+        ));
+      }
     }
   }
 

@@ -35,7 +35,11 @@ class _EmployeeLoginScreenState extends State<EmployeeLoginScreen> {
       }
     } catch (e) {
       if (mounted) setState(() => _isLoading = false);
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Connection server error'), backgroundColor: Color(0xFFF43F5E)));
+      if (mounted) {
+        String msg = e.toString();
+        if (msg.contains('XMLHttpRequest error')) msg = 'Network connection blocked by browser or firewall.';
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $msg'), backgroundColor: const Color(0xFFF43F5E)));
+      }
     }
   }
 

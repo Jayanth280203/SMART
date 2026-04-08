@@ -24,7 +24,7 @@ app = Flask(__name__,
             template_folder='templates',
             static_folder='static',
             static_url_path='')
-CORS(app) # Enable CORS for Flutter Web
+CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}}) # Multi-device compatible CORS
 app.secret_key = 'supersecretkey_for_final_project'
 
 # --- NEW ANALYZER MODULES ---
@@ -926,19 +926,31 @@ def login_employer():
     try:
         data = request.get_json(silent=True) or {}
         if not os.path.exists(EMPLOYER_DB):
-            return jsonify({"status": "error", "message": "No employer accounts found. Please sign up."}), 404
+            init_dbs()
             
-        db = pd.read_csv(EMPLOYER_DB, dtype=str)
+        try:
+            db = pd.read_csv(EMPLOYER_DB, dtype=str)
+        except Exception as e:
+            print(f"Dataset read error: {e}")
+            return jsonify({"status": "error", "message": "Database access error"}), 500
         
         # Check for email and password
-        email = str(data.get('email')).strip().lower()
-        password = str(data.get('password')).strip()
+        email = str(data.get('email', '')).strip().lower()
+        password = str(data.get('password', '')).strip()
         
+        if not email or not password:
+             return jsonify({"status": "error", "message": "Email and Password are required"}), 400
+
+        # Filter manually if columns are missing or messy
+        if db.empty or 'email' not in db.columns:
+             return jsonify({"status": "error", "message": "No registered accounts found"}), 401
+             
         user = db[(db['email'].astype(str).str.lower().str.strip() == email) & 
                   (db['password'].astype(str).str.strip() == password)]
                   
         if not user.empty:
-            comp_name = user.iloc[0]['company_name']
+            user_data = user.iloc[0].to_dict()
+            comp_name = user_data.get('company_name', 'Enterprise Partner')
             session['role'] = 'employer'
             session['email'] = email
             session['company'] = comp_name
