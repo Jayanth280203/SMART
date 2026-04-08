@@ -14,3 +14,4 @@ networkx
 gunicorn
 pymongo
 dnspython
+google-generativeai
