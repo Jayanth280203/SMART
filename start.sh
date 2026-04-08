@@ -74,7 +74,7 @@ y_acad = safe_transform(le_academic, df['predicted_academic_job_role']).values
 
 # 70% Train | 30% Test Split
 X_train_a, X_test_a, y_train_a, y_test_a = train_test_split(
-    X_acad, y_acad, test_size=0.30, random_state=42, stratify=y_acad
+    X_acad, y_acad, test_size=0.30, random_state=42
 )
 print(f'Academic Model -> Train: {len(X_train_a)} | Test: {len(X_test_a)}')
 
@@ -104,7 +104,7 @@ y_skill = safe_transform(le_skill, df['predicted_skill_job_role']).values
 
 # 70% Train | 30% Test Split
 X_train_s, X_test_s, y_train_s, y_test_s = train_test_split(
-    X_skill, y_skill, test_size=0.30, random_state=42, stratify=y_skill
+    X_skill, y_skill, test_size=0.30, random_state=42
 )
 print(f'Skill Model -> Train: {len(X_train_s)} | Test: {len(X_test_s)}')
 
