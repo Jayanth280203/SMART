@@ -1,0 +1,235 @@
+Number,Name,Reserved,District,Lok Sabha Constituency
+1,Gummidipoondi,-,Thiruvallur,Tiruvallur
+2,Ponneri,SC,Thiruvallur,Tiruvallur
+3,Tiruttani,-,Thiruvallur,Arakkonam
+4,Thiruvallur,-,Thiruvallur,Tiruvallur
+5,Poonamallee,SC,Thiruvallur,Tiruvallur
+6,Avadi,-,Thiruvallur,Tiruvallur
+7,Maduravoyal,-,Chennai,Sriperumbudur
+8,Ambattur,-,Chennai,Sriperumbudur
+9,Madavaram,-,Chennai,Tiruvallur
+10,Thiruvottiyur,-,Chennai,Chennai North
+11,Dr. Radhakrishnan Nagar,-,Chennai,Chennai North
+12,Perambur,-,Chennai,Chennai North
+13,Kolathur,-,Chennai,Chennai North
+14,Villivakkam,-,Chennai,Chennai Central
+15,Thiru-Vi-Ka-Nagar,SC,Chennai,Chennai North
+16,Egmore,SC,Chennai,Chennai Central
+17,Royapuram,-,Chennai,Chennai North
+18,Harbour,-,Chennai,Chennai Central
+19,Chepauk-Thiruvallikeni,-,Chennai,Chennai Central
+20,Thousand Lights,-,Chennai,Chennai Central
+21,Anna Nagar,-,Chennai,Chennai Central
+22,Virugampakkam,-,Chennai,Chennai South
+23,Saidapet,-,Chennai,Chennai South
+24,Thiyagarayanagar,-,Chennai,Chennai South
+25,Mylapore,-,Chennai,Chennai South
+26,Velachery,-,Chennai,Chennai South
+27,Sholinganallur,-,Chennai,Chennai South
+28,Alandur,-,Chennai,Sriperumbudur
+29,Sriperumbudur,SC,Kancheepuram,Sriperumbudur
+30,Pallavaram,-,Chengalpattu,Sriperumbudur
+31,Tambaram,-,Chengalpattu,Sriperumbudur
+32,Chengalpattu,-,Chengalpattu,Kanchipuram
+33,Thiruporur,-,Chengalpattu,Kanchipuram
+34,Cheyyur,SC,Chengalpattu,Kanchipuram
+35,Madurantakam,SC,Chengalpattu,Kanchipuram
+36,Uthiramerur,-,Kancheepuram,Kanchipuram
+37,Kancheepuram,-,Kancheepuram,Kanchipuram
+38,Arakkonam,SC,Ranipet,Arakkonam
+39,Sholingur,-,Ranipet,Arakkonam
+40,Katpadi,-,Vellore,Arakkonam
+41,Ranipet,-,Ranipet,Arakkonam
+42,Arcot,-,Ranipet,Arakkonam
+43,Vellore,-,Vellore,Vellore
+44,Anaikattu,-,Vellore,Vellore
+45,Kilvaithinankuppam,SC,Vellore,Vellore
+46,Gudiyatham,SC,Vellore,Vellore
+47,Vaniyambadi,-,Tirupattur,Vellore
+48,Ambur,-,Tirupattur,Vellore
+49,Jolarpet,-,Tirupattur,Tiruvannamalai
+50,Tiruppattur,-,Tirupattur,Tiruvannamalai
+51,Uthangarai,SC,Krishnagiri,Krishnagiri
+52,Bargur,-,Krishnagiri,Krishnagiri
+53,Krishnagiri,-,Krishnagiri,Krishnagiri
+54,Veppanahalli,-,Krishnagiri,Krishnagiri
+55,Hosur,-,Krishnagiri,Krishnagiri
+56,Thalli,-,Krishnagiri,Krishnagiri
+57,Palacode,-,Dharmapuri,Dharamapuri
+58,Pennagaram,-,Dharmapuri,Dharamapuri
+59,Dharmapuri,-,Dharmapuri,Dharamapuri
+60,Pappireddippatti,-,Dharmapuri,Dharamapuri
+61,Harur,SC,Dharmapuri,Dharamapuri
+62,Chengam,SC,Tiruvannamalai,Tiruvannamalai
+63,Tiruvannamalai,-,Tiruvannamalai,Tiruvannamalai
+64,Kilpennathur,-,Tiruvannamalai,Tiruvannamalai
+65,Kalasapakkam,-,Tiruvannamalai,Tiruvannamalai
+66,Polur,-,Tiruvannamalai,Arani
+67,Arani,-,Tiruvannamalai,Arani
+68,Cheyyar,-,Tiruvannamalai,Arani
+69,Vandavasi,SC,Tiruvannamalai,Arani
+70,Gingee,-,Viluppuram,Arani
+71,Mailam,-,Viluppuram,Arani
+72,Tindivanam,-,Viluppuram,Viluppuram
+73,Vanur,SC,Viluppuram,Viluppuram
+74,Villupuram,-,Viluppuram,Viluppuram
+75,Vikravandi,-,Viluppuram,Viluppuram
+76,Tirukkoyilur,-,Kallakurichi,Viluppuram
+77,Ulundurpettai,-,Kallakurichi,Viluppuram
+78,Rishivandiyam,-,Kallakurichi,Kallakurichi
+79,Sankarapuram,-,Kallakurichi,Kallakurichi
+80,Kallakurichi,SC,Kallakurichi,Kallakurichi
+81,Gangavalli,SC,Salem,Kallakurichi
+82,Attur,SC,Salem,Kallakurichi
+83,Yercaud,ST,Salem,Kallakurichi
+84,Omalur,-,Salem,Salem
+85,Mettur,-,Salem,Dharamapuri
+86,Edappadi,-,Salem,Salem
+87,Sankari,-,Salem,Namakkal
+88,Salem (West),-,Salem,Salem
+89,Salem (North),-,Salem,Salem
+90,Salem (South),-,Salem,Salem
+91,Veerapandi,-,Salem,Salem
+92,Rasipuram,SC,Namakkal,Namakkal
+93,Senthamangalam,ST,Namakkal,Namakkal
+94,Namakkal,-,Namakkal,Namakkal
+95,Paramathi Velur,-,Namakkal,Namakkal
+96,Tiruchengodu,-,Namakkal,Namakkal
+97,Kumarapalayam,-,Namakkal,Erode
+98,Erode (East),-,Erode,Erode
+99,Erode (West),-,Erode,Erode
+100,Modakkurichi,-,Erode,Erode
+101,Dharapuram,SC,Tiruppur,Erode
+102,Kangayam,-,Tiruppur,Erode
+103,Perundurai,-,Erode,Tiruppur
+104,Bhavani,-,Erode,Tiruppur
+105,Anthiyur,-,Erode,Tiruppur
+106,Gobichettipalayam,-,Erode,Tiruppur
+107,Bhavanisagar,SC,Erode,Nilgiris
+108,Udhagamandalam,-,Nilgiris,Nilgiris
+109,Gudalur,SC,Nilgiris,Nilgiris
+110,Coonoor,-,Nilgiris,Nilgiris
+111,Mettupalayam,-,Coimbatore,Nilgiris
+112,Avanashi,SC,Tiruppur,Nilgiris
+113,Tiruppur (North),-,Tiruppur,Tiruppur
+114,Tiruppur (South),-,Tiruppur,Tiruppur
+115,Palladam,-,Coimbatore,Coimbatore
+116,Sulur,-,Coimbatore,Coimbatore
+117,Kavundampalayam,-,Coimbatore,Coimbatore
+118,Coimbatore (North),-,Coimbatore,Coimbatore
+119,Thondamuthur,-,Coimbatore,Pollachi
+120,Coimbatore (South),-,Coimbatore,Coimbatore
+121,Singanallur,-,Coimbatore,Coimbatore
+122,Kinathukadavu,-,Coimbatore,Pollachi
+123,Pollachi,-,Coimbatore,Pollachi
+124,Valparai,SC,Coimbatore,Pollachi
+125,Udumalaipettai,-,Tiruppur,Pollachi
+126,Madathukulam,-,Tiruppur,Pollachi
+127,Palani,-,Dindigul,Dindigul
+128,Oddanchatram,-,Dindigul,Dindigul
+129,Athoor,-,Dindigul,Dindigul
+130,Nilakottai,SC,Dindigul,Dindigul
+131,Natham,-,Dindigul,Dindigul
+132,Dindigul,-,Dindigul,Dindigul
+133,Vedasandur,-,Dindigul,Karur
+134,Aravakurichi,-,Karur,Karur
+135,Karur,-,Karur,Karur
+136,Krishnarayapuram,SC,Karur,Karur
+137,Kulithalai,-,Karur,Perambalur
+138,Manapaarai,-,Tiruchirappalli,Karur
+139,Srirangam,-,Tiruchirappalli,Tiruchirappalli
+140,Tiruchirappalli (West),-,Tiruchirappalli,Tiruchirappalli
+141,Tiruchirappalli (East),-,Tiruchirappalli,Tiruchirappalli
+142,Thiruverumbur,-,Tiruchirappalli,Tiruchirappalli
+143,Lalgudi,-,Tiruchirappalli,Perambalur
+144,Manachanallur,-,Tiruchirappalli,Perambalur
+145,Musiri,-,Tiruchirappalli,Perambalur
+146,Thuraiyur,SC,Tiruchirappalli,Perambalur
+147,Perambalur,SC,Perambalur,Perambalur
+148,Kunnam,-,Perambalur,Chidambaram
+149,Ariyalur,-,Ariyalur,Chidambaram
+150,Jayankondam,-,Ariyalur,Chidambaram
+151,Tittakudi,SC,Cuddalore,Cuddalore
+152,Virudhachalam,-,Cuddalore,Cuddalore
+153,Neyveli,-,Cuddalore,Cuddalore
+154,Panruti,-,Cuddalore,Cuddalore
+155,Cuddalore,-,Cuddalore,Cuddalore
+156,Kurinjipadi,-,Cuddalore,Cuddalore
+157,Bhuvanagiri,-,Cuddalore,Chidambaram
+158,Chidambaram,-,Cuddalore,Chidambaram
+159,Kattumannarkoil,SC,Cuddalore,Chidambaram
+160,Sirkazhi,SC,Mayiladuthurai,Mayiladuthurai
+161,Mayiladuturai,-,Mayiladuthurai,Mayiladuthurai
+162,Poompuhar,-,Mayiladuthurai,Mayiladuthurai
+163,Nagapattinam,-,Nagapattinam,Nagapattinam
+164,Kilvelur,SC,Nagapattinam,Nagapattinam
+165,Vedaranyam,-,Nagapattinam,Nagapattinam
+166,Thiruthuraipoondi,SC,Thiruvarur,Nagapattinam
+167,Mannargudi,-,Thiruvarur,Thanjavur
+168,Thiruvarur,-,Thiruvarur,Nagapattinam
+169,Nannilam,-,Thiruvarur,Nagapattinam
+170,Thiruvidaimarudur,SC,Thanjavur,Mayiladuthurai
+171,Kumbakonam,-,Thanjavur,Mayiladuthurai
+172,Papanasam,-,Thanjavur,Mayiladuthurai
+173,Thiruvaiyaru,-,Thanjavur,Thanjavur
+174,Thanjavur,-,Thanjavur,Thanjavur
+175,Orathanadu,-,Thanjavur,Thanjavur
+176,Pattukkottai,-,Thanjavur,Thanjavur
+177,Peravurani,-,Thanjavur,Thanjavur
+178,Gandarvakottai,SC,Pudukkottai,Tiruchirappalli
+179,Viralimalai,-,Pudukkottai,Karur
+180,Pudukkottai,-,Pudukkottai,Tiruchirappalli
+181,Thirumayam,-,Pudukkottai,Sivaganga
+182,Alangudi,-,Pudukkottai,Sivaganga
+183,Aranthangi,-,Pudukkottai,Ramanathapuram
+184,Karaikudi,-,Sivaganga,Sivaganga
+185,Tiruppattur,-,Sivaganga,Sivaganga
+186,Sivaganga,-,Sivaganga,Sivaganga
+187,Manamadurai,SC,Sivaganga,Sivaganga
+188,Melur,-,Madurai,Madurai
+189,Madurai East,-,Madurai,Madurai
+190,Sholavandan,SC,Madurai,Theni
+191,Madurai North,-,Madurai,Madurai
+192,Madurai South,-,Madurai,Madurai
+193,Madurai Central,-,Madurai,Madurai
+194,Madurai West,-,Madurai,Madurai
+195,Thiruparankundram,-,Madurai,Virudhunagar
+196,Thirumangalam,-,Madurai,Virudhunagar
+197,Usilampatti,-,Madurai,Theni
+198,Andipatti,-,Theni,Theni
+199,Periyakulam,SC,Theni,Theni
+200,Bodinayakanur,-,Theni,Theni
+201,Cumbum,-,Theni,Theni
+202,Rajapalayam,-,Virudhunagar,Tenkasi
+203,Srivilliputhur,SC,Virudhunagar,Tenkasi
+204,Sattur,-,Virudhunagar,Virudhunagar
+205,Sivakasi,-,Virudhunagar,Virudhunagar
+206,Virudhunagar,-,Virudhunagar,Virudhunagar
+207,Aruppukkottai,-,Virudhunagar,Virudhunagar
+208,Tiruchuli,-,Virudhunagar,Ramanathapuram
+209,Paramakudi,SC,Ramanathapuram,Ramanathapuram
+210,Tiruvadanai,-,Ramanathapuram,Ramanathapuram
+211,Ramanathapuram,-,Ramanathapuram,Ramanathapuram
+212,Mudhukulathur,-,Ramanathapuram,Ramanathapuram
+213,Vilathikulam,-,Thoothukudi,Thoothukkudi
+214,Thoothukkudi,-,Thoothukudi,Thoothukkudi
+215,Tiruchendur,-,Thoothukudi,Thoothukkudi
+216,Srivaikuntam,-,Thoothukudi,Thoothukkudi
+217,Ottapidaram,SC,Thoothukudi,Thoothukkudi
+218,Kovilpatti,-,Thoothukudi,Thoothukkudi
+219,Sankarankovil,SC,Tenkasi,Tenkasi
+220,Vasudevanallur,SC,Tenkasi,Tenkasi
+221,Kadayanallur,-,Tenkasi,Tenkasi
+222,Tenkasi,-,Tenkasi,Tenkasi
+223,Alangulam,-,Tenkasi,Tirunelveli
+224,Tirunelveli,-,Tirunelveli,Tirunelveli
+225,Ambasamudram,-,Tirunelveli,Tirunelveli
+226,Palayamkottai,-,Tirunelveli,Tirunelveli
+227,Nanguneri,-,Tirunelveli,Tirunelveli
+228,Radhapuram,-,Tirunelveli,Tirunelveli
+229,Kanniyakumari,-,Kanniyakumari,Kanniyakumari
+230,Nagercoil,-,Kanniyakumari,Kanniyakumari
+231,Colachal,-,Kanniyakumari,Kanniyakumari
+232,Padmanabhapuram,-,Kanniyakumari,Kanniyakumari
+233,Vilavancode,-,Kanniyakumari,Kanniyakumari
+234,Killiyoor,-,Kanniyakumari,Kanniyakumari

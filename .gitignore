@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.pyc
+*.log
+
+# Exclude ALL large model files
+*.pkl
+models/
+
+# Exclude log files and temp files
+*.txt
+!requirements.txt
+!all_roles.txt
+!districts.txt
+
+# Exclude temp/dev files
+.vscode/
+.idea/
+tmp_*.py
+git_debug.py
+git_status_ascii.txt
+git_status.txt
+git_push_result.txt
+
+# Exclude large data backups
+TN_Student_Skill_Dataset_backup.csv
