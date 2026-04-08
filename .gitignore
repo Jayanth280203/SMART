@@ -3,9 +3,9 @@ __pycache__/
 *.pyc
 *.log
 
-# Exclude ALL large model files
-*.pkl
-models/
+# Allow small model files for faster startup
+# *.pkl
+# models/
 
 # Exclude log files and temp files
 *.txt
