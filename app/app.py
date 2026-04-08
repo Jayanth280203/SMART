@@ -5,11 +5,15 @@ import joblib
 import numpy as np
 import os
 import json
-import scipy.sparse as sp
-import google.generativeai as genai
 import requests
 from bs4 import BeautifulSoup
 import io
+try:
+    import google.generativeai as genai
+    _GENAI_AVAILABLE = True
+except ImportError:
+    genai = None
+    _GENAI_AVAILABLE = False
 try:
     import pdfplumber
     import docx
