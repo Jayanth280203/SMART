@@ -89,4 +89,4 @@ print('All models trained and saved!')
 "
 
 echo "Starting Flask app..."
-cd app && gunicorn app:app --bind 0.0.0.0:10000 --workers 2 --timeout 300
+cd app && gunicorn app:app --bind 0.0.0.0:${PORT:-10000} --workers 2 --timeout 300

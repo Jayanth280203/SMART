@@ -4,7 +4,6 @@ pandas
 joblib
 numpy
 scipy
-google-generativeai
 requests
 beautifulsoup4
 pdfminer.six
@@ -12,5 +11,4 @@ scikit-learn
 pdfplumber
 python-docx
 networkx
-sentence-transformers
 gunicorn
