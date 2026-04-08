@@ -1,5 +1,9 @@
-from sentence_transformers import SentenceTransformer, util
-import torch
+try:
+    from sentence_transformers import SentenceTransformer, util
+    import torch
+    _TRANSFORMERS_AVAILABLE = True
+except ImportError:
+    _TRANSFORMERS_AVAILABLE = False
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np

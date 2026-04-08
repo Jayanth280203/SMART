@@ -8,11 +8,9 @@ google-generativeai
 requests
 beautifulsoup4
 pdfminer.six
-python-jobspy
 scikit-learn
 pdfplumber
 python-docx
 networkx
 sentence-transformers
-torch
 gunicorn
