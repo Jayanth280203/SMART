@@ -346,7 +346,7 @@ PSG IMS & Research,Kancheepuram,Uthiramerur,General
 Kanchipuram Meenakshi Medical College - College of Nursing,Kanchipuram,General,Nursing
 Meenakshi Medical College Hospital and Research Institute,Kanchipuram,General,Medical
 "Sri Sairam Polytechnic College, West Tambaram (Kanchipuram Region)",Kanchipuram,General,Polytechnic
-"Indian Institute of Information Technology Design and Manufacturing (IIITDM), Kancheepuram",Kanchipuram,Kancheepuram,University
+"Indian Institute of Information Technology Design and Manufacturing (IIITDM), Kancheepuram",Kancheepuram,Kancheepuram,University
 "Adhi College of Engineering and Technology, Kanchipuram",Kanchipuram,Kanchipuram,Engineering
 "Arignar Anna Government Arts College, Kanchipuram",Kanchipuram,Kanchipuram,Arts and Science
 "Arignar Anna Government Law College, Kanchipuram",Kanchipuram,Kanchipuram,Law
@@ -360,14 +360,14 @@ Meenakshi Medical College Hospital and Research Institute,Kanchipuram,General,Me
 "Pallavan Polytechnic College, Kanchipuram",Kanchipuram,Kanchipuram,Polytechnic
 "S.S.K.V. College of Arts and Science for Women, Kanchipuram",Kanchipuram,Kanchipuram,Arts and Science
 "Kanchi Shri Krishna College of Arts and Science, Kilambi",Kanchipuram,Kilambi,Arts and Science
-"Jeppiaar Institute of Technology, Kunnam",Kanchipuram,Kunnam,Engineering
+"Jeppiaar Institute of Technology, Kunnam",Perambalur,Kunnam,Engineering
 "Annai Therasa Arts and Science College, Mangalam",Kanchipuram,Mangalam,Arts and Science
-"Sri Venkateswara College of Engineering (SVCE), Sriperumbudur",Kanchipuram,Sriperumbudur,Engineering
-"Rajalakshmi Engineering College (REC), Thandalam",Kanchipuram,Sriperumbudur,Engineering
-"Saveetha College of Education, Thandalam",Kanchipuram,Sriperumbudur,B.Ed
-"Saveetha Engineering College, Thandalam",Kanchipuram,Sriperumbudur,Engineering
-"Government Arts and Science College, Uthiramerur",Kanchipuram,Uthiramerur,Arts and Science
-"Panimalar Engineering College, Varadharajapuram",Kanchipuram,Sriperumbudur,Engineering
+"Sri Venkateswara College of Engineering (SVCE), Sriperumbudur",Kancheepuram,Sriperumbudur,Engineering
+"Rajalakshmi Engineering College (REC), Thandalam",Kancheepuram,Sriperumbudur,Engineering
+"Saveetha College of Education, Thandalam",Kancheepuram,Sriperumbudur,B.Ed
+"Saveetha Engineering College, Thandalam",Kancheepuram,Sriperumbudur,Engineering
+"Government Arts and Science College, Uthiramerur",Kancheepuram,Uthiramerur,Arts and Science
+"Panimalar Engineering College, Varadharajapuram",Kancheepuram,Sriperumbudur,Engineering
 NIT Trichy,Tiruchirappalli,Thiruverumbur,General
 School of Excellence in Law,Kanniyakumari,Colachal,General
 Thiagarajar CE,Kanniyakumari,Colachal,General
@@ -400,15 +400,15 @@ Kanyakumari Medical College - College of Nursing,Kanyakumari,General,Nursing
 "Sree Devi Kumari Women's College, Kuzhithurai",Kanyakumari,Kuzhithurai,Arts and Science
 "Malankara Catholic College, Mariagiri",Kanyakumari,Mariagiri,Arts and Science
 "Bishop Agniswamy College of Education, Muttom",Kanyakumari,Muttom,B.Ed
-"Annan College of Nursing, Nagercoil",Kanyakumari,Nagercoil,Nursing
-"Government Polytechnic College, Nagercoil",Kanyakumari,Nagercoil,Polytechnic
-"Holy Cross College (Autonomous), Nagercoil",Kanyakumari,Nagercoil,Arts and Science
-"N.M.S.S.V.N. Polytechnic College, Nagercoil",Kanyakumari,Nagercoil,Polytechnic
-"Pioneer Kumaraswamy College, Nagercoil",Kanyakumari,Nagercoil,Arts and Science
-"Ponjesly College of Engineering, Nagercoil",Kanyakumari,Nagercoil,Engineering
-"Scott Christian College (Autonomous), Nagercoil",Kanyakumari,Nagercoil,Arts and Science
-"South Thamaraikulam Hindu College (ST Hindu College), Nagercoil",Kanyakumari,Nagercoil,Arts and Science
-"Women's Christian College (WCC), Nagercoil",Kanyakumari,Nagercoil,Arts and Science
+"Annan College of Nursing, Nagercoil",Kanniyakumari,Nagercoil,Nursing
+"Government Polytechnic College, Nagercoil",Kanniyakumari,Nagercoil,Polytechnic
+"Holy Cross College (Autonomous), Nagercoil",Kanniyakumari,Nagercoil,Arts and Science
+"N.M.S.S.V.N. Polytechnic College, Nagercoil",Kanniyakumari,Nagercoil,Polytechnic
+"Pioneer Kumaraswamy College, Nagercoil",Kanniyakumari,Nagercoil,Arts and Science
+"Ponjesly College of Engineering, Nagercoil",Kanniyakumari,Nagercoil,Engineering
+"Scott Christian College (Autonomous), Nagercoil",Kanniyakumari,Nagercoil,Arts and Science
+"South Thamaraikulam Hindu College (ST Hindu College), Nagercoil",Kanniyakumari,Nagercoil,Arts and Science
+"Women's Christian College (WCC), Nagercoil",Kanniyakumari,Nagercoil,Arts and Science
 "Lekshmipuram College of Arts and Science, Neyyoor",Kanyakumari,Neyyoor,Arts and Science
 "C.S.I. Institute of Technology, Thovalai",Kanyakumari,Thovalai,Engineering
 "Loyola Institute of Technology and Science (LITES), Thovalai",Kanyakumari,Thovalai,Engineering
@@ -558,21 +558,21 @@ Namakkal Government Medical College,Namakkal,Tiruchengodu,Medical
 "Vivekanandha College of Arts and Sciences for Women, Tiruchengode",Namakkal,Tiruchengodu,Arts and Science
 "Vivekanandha College of Engineering for Women, Tiruchengode",Namakkal,Tiruchengodu,Engineering
 "Vivekanandha College of Nursing, Tiruchengode",Namakkal,Tiruchengodu,Nursing
-"Emerald Heights College for Women, Ooty",Nilgiris,Coonoor,Arts and Science
-"McGAN's Ooty School of Architecture, Ooty",Nilgiris,Coonoor,Architecture
-"Nilgiri College of Arts and Science, Thaloor",Nilgiris,Coonoor,Arts and Science
-Nilgris District Co-operative Management Institute,Nilgiris,Coonoor,Management
-"St. Joseph's College of Education, Ooty",Nilgiris,Coonoor,B.Ed
-"St. Jude's College of Education, Kotagiri",Nilgiris,Coonoor,B.Ed
-"Government Medical College, The Nilgiris (Ooty)",Nilgiris,Gudalur,Medical
-"Government Polytechnic College, Udhagamandalam",Nilgiris,Udhagamandalam,Polytechnic
-"Providence College for Women, Coonoor",Nilgiris,Coonoor,Arts and Science
-"Bharathiar University Arts and Science College, Gudalur",Nilgiris,Gudalur,Arts and Science
-"CSI College of Engineering, Ketti",Nilgiris,Udhagamandalam,Engineering
-"Government Arts College, Udhagamandalam",Nilgiris,Udhagamandalam,Arts and Science
-"JSS College of Pharmacy, Ooty",Nilgiris,Udhagamandalam,Paramedical
-"Kaypeeyes College of Arts and Science, Kotagiri",Nilgiris,Udhagamandalam,Arts and Science
-"Monarch International College of Hotel Management, Ooty",Nilgiris,Udhagamandalam,Catering & Hotel Management
+"Emerald Heights College for Women, Ooty",The Nilgiris,Coonoor,Arts and Science
+"McGAN's Ooty School of Architecture, Ooty",The Nilgiris,Coonoor,Architecture
+"Nilgiri College of Arts and Science, Thaloor",The Nilgiris,Coonoor,Arts and Science
+Nilgris District Co-operative Management Institute,The Nilgiris,Coonoor,Management
+"St. Joseph's College of Education, Ooty",The Nilgiris,Coonoor,B.Ed
+"St. Jude's College of Education, Kotagiri",The Nilgiris,Coonoor,B.Ed
+"Government Medical College, The Nilgiris (Ooty)",The Nilgiris,Gudalur,Medical
+"Government Polytechnic College, Udhagamandalam",The Nilgiris,Udhagamandalam,Polytechnic
+"Providence College for Women, Coonoor",The Nilgiris,Coonoor,Arts and Science
+"Bharathiar University Arts and Science College, Gudalur",The Nilgiris,Gudalur,Arts and Science
+"CSI College of Engineering, Ketti",The Nilgiris,Udhagamandalam,Engineering
+"Government Arts College, Udhagamandalam",The Nilgiris,Udhagamandalam,Arts and Science
+"JSS College of Pharmacy, Ooty",The Nilgiris,Udhagamandalam,Paramedical
+"Kaypeeyes College of Arts and Science, Kotagiri",The Nilgiris,Udhagamandalam,Arts and Science
+"Monarch International College of Hotel Management, Ooty",The Nilgiris,Udhagamandalam,Catering & Hotel Management
 "Dhanalakshmi Srinivasan College of Arts and Science for Women, Perambalur",Perambalur,Perambalur,Arts and Science
 "Dhanalakshmi Srinivasan College of Pharmacy, Perambalur",Perambalur,Perambalur,Paramedical
 "Dhanalakshmi Srinivasan College of Physical Education, Perambalur",Perambalur,Perambalur,Physical Education
@@ -972,7 +972,7 @@ Annammal College of Education for Women,Tirunelveli,Tirunelveli,B.Ed
 "Sankar Polytechnic College, Sankar Nagar",Tirunelveli,Tirunelveli,Polytechnic
 "St. John's College, Palayamkottai",Tirunelveli,Palayamkottai,Arts and Science
 Tirunelveli Medical College - College of Nursing,Tirunelveli,Tirunelveli,Nursing
-"Mazharul Uloom College, Ambur",Tirupathur,Ambur,Arts and Science
+"Mazharul Uloom College, Ambur",Tirupattur,Ambur,Arts and Science
 Ambur Reddy Education Society College (Ambur),Tirupathur,General,Arts and Science
 "Bharathidasan Engineering College, Natrampalli",Tirupathur,Natrampalli,Engineering
 "S.K.S. College of Nursing, Natrampalli",Tirupathur,Natrampalli,Nursing
@@ -987,12 +987,12 @@ Ambur Reddy Education Society College (Ambur),Tirupathur,General,Arts and Scienc
 "Sri Nandhanam College of Engineering and Technology, Tirupathur",Tirupathur,Tirupathur,Engineering
 "Sri Nandhanam Polytechnic College, Tirupathur",Tirupathur,Tirupathur,Polytechnic
 "Tirupathur Arts and Science College, Tirupathur",Tirupathur,Tirupathur,Arts and Science
-"Islamiah College (Autonomous), Vaniyambadi",Tirupathur,Vaniyambadi,Arts and Science
-"Islamiah Women's Arts and Science College, Vaniyambadi",Tirupathur,Vaniyambadi,Arts and Science
-"Marudhar Kesari Jain College for Women, Vaniyambadi",Tirupathur,Vaniyambadi,Arts and Science
-"Priyadarshini Engineering College, Vaniyambadi",Tirupathur,Vaniyambadi,Engineering
-"Priyadarshini Polytechnic College, Vaniyambadi",Tirupathur,Vaniyambadi,Polytechnic
-"St. Joseph's College of Education, Vaniyambadi",Tirupathur,Vaniyambadi,B.Ed
+"Islamiah College (Autonomous), Vaniyambadi",Tirupattur,Vaniyambadi,Arts and Science
+"Islamiah Women's Arts and Science College, Vaniyambadi",Tirupattur,Vaniyambadi,Arts and Science
+"Marudhar Kesari Jain College for Women, Vaniyambadi",Tirupattur,Vaniyambadi,Arts and Science
+"Priyadarshini Engineering College, Vaniyambadi",Tirupattur,Vaniyambadi,Engineering
+"Priyadarshini Polytechnic College, Vaniyambadi",Tirupattur,Vaniyambadi,Polytechnic
+"St. Joseph's College of Education, Vaniyambadi",Tirupattur,Vaniyambadi,B.Ed
 "Don Bosco College, Yelagiri Hills",Tirupathur,Yelagiri Hills,Arts and Science
 Government College of Engineering Tirunelveli,Tirunelveli,Palayamkottai,Engineering
 Patrician College,Chennai,Adyar,General
@@ -1029,12 +1029,12 @@ Tiruppur Government Medical College,Tiruppur,Madathukulam,Medical
 "Rudhraveni Muthuswami Polytechnic College, Udumalpet",Tiruppur,Udumalaipettai,Polytechnic
 "Sasurie College of Engineering, Vijayamangalam",Tiruppur,Kangayam,Engineering
 "Prathyusha Engineering College, Aranvoyalkuppam",Tiruvallur,Aranvoyalkuppam,Engineering
-"Mahalakshmi Women's College of Arts and Science, Avadi",Tiruvallur,Avadi,Arts and Science
-"Murugappa Polytechnic College, Avadi",Tiruvallur,Avadi,Polytechnic
-"Nazareth College of Arts and Science, Avadi",Tiruvallur,Avadi,Arts and Science
-"Vel Tech High Tech Dr.Rangarajan Dr.Sakunthala Engineering College, Avadi",Tiruvallur,Avadi,Engineering
-"Vel Tech Multi Tech Dr.Rangarajan Dr.Sakunthala Engineering College, Avadi",Tiruvallur,Avadi,Engineering
-"Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology, Avadi",Tiruvallur,Avadi,University
+"Mahalakshmi Women's College of Arts and Science, Avadi",Thiruvallur,Avadi,Arts and Science
+"Murugappa Polytechnic College, Avadi",Thiruvallur,Avadi,Polytechnic
+"Nazareth College of Arts and Science, Avadi",Thiruvallur,Avadi,Arts and Science
+"Vel Tech High Tech Dr.Rangarajan Dr.Sakunthala Engineering College, Avadi",Thiruvallur,Avadi,Engineering
+"Vel Tech Multi Tech Dr.Rangarajan Dr.Sakunthala Engineering College, Avadi",Thiruvallur,Avadi,Engineering
+"Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology, Avadi",Thiruvallur,Avadi,University
 Government Medical College Tiruvallur,Tiruvallur,General,Medical
 "J.N.N. Arts & Science Women's College, Kannigaipair",Tiruvallur,Kannigaipair,Arts and Science
 "J.N.N. Institute of Engineering, Kannigaipair",Tiruvallur,Kannigaipair,Engineering
@@ -1049,8 +1049,8 @@ Government Medical College Tiruvallur,Tiruvallur,General,Medical
 "Sriram College of Arts and Science, Perumalpattu",Tiruvallur,Perumalpattu,Arts and Science
 "Sriram Engineering College, Perumalpattu",Tiruvallur,Perumalpattu,Engineering
 "Sriram Polytechnic College, Perumalpattu",Tiruvallur,Perumalpattu,Polytechnic
-"Loganatha Narayanasamy Government College, Ponneri",Tiruvallur,Ponneri,Arts and Science
-"Tamil Nadu Dr. J. Jayalalithaa Fisheries University (FCRI), Ponneri",Tiruvallur,Ponneri,University
+"Loganatha Narayanasamy Government College, Ponneri",Thiruvallur,Ponneri,Arts and Science
+"Tamil Nadu Dr. J. Jayalalithaa Fisheries University (FCRI), Ponneri",Thiruvallur,Ponneri,University
 "R.M.K. College of Engineering and Technology, Puduvoyal",Tiruvallur,Puduvoyal,Engineering
 "Jaya College of Arts and Science, Thiruninravur",Tiruvallur,Thiruninravur,Arts and Science
 "Jaya College of Education, Thiruninravur",Tiruvallur,Thiruninravur,B.Ed
@@ -1059,11 +1059,11 @@ Government Medical College Tiruvallur,Tiruvallur,General,Medical
 "S.A. College of Arts & Science, Thiruverkadu",Tiruvallur,Thiruverkadu,Arts and Science
 "S.A. Engineering College, Thiruverkadu",Tiruvallur,Thiruverkadu,Engineering
 "S.A. Polytechnic College, Thiruverkadu",Tiruvallur,Thiruverkadu,Polytechnic
-"G.R.T. College of Education, Tiruttani",Tiruvallur,Tiruttani,B.Ed
-"G.R.T. College of Nursing, Tiruttani",Tiruvallur,Tiruttani,Nursing
-"G.R.T. Institute of Engineering and Technology, Tiruttani",Tiruvallur,Tiruttani,Engineering
-"G.R.T. Polytechnic College, Tiruttani",Tiruvallur,Tiruttani,Polytechnic
-"Government Arts College, Tiruttani",Tiruvallur,Tiruttani,Arts and Science
+"G.R.T. College of Education, Tiruttani",Thiruvallur,Tiruttani,B.Ed
+"G.R.T. College of Nursing, Tiruttani",Thiruvallur,Tiruttani,Nursing
+"G.R.T. Institute of Engineering and Technology, Tiruttani",Thiruvallur,Tiruttani,Engineering
+"G.R.T. Polytechnic College, Tiruttani",Thiruvallur,Tiruttani,Polytechnic
+"Government Arts College, Tiruttani",Thiruvallur,Tiruttani,Arts and Science
 "SRET College of Nursing, Tiruvallur",Tiruvallur,Tiruvallur,Nursing
 "Arunai Engineering College, Tiruvannamalai",Tiruvannamalai,Tiruvannamalai,Engineering
 Government Tiruvannamalai Medical College - College of Nursing,Tiruvannamalai,Arani,Nursing
@@ -1093,18 +1093,18 @@ Government Tiruvarur Medical College,Tiruvarur,General,Medical
 Government Tiruvarur Medical College - College of Nursing,Tiruvarur,General,Nursing
 "Anjalai Ammal Mahalingam Engineering College (AAMEC), Kovilvenni",Tiruvarur,Kovilvenni,Engineering
 "Swami Dayananda College of Arts and Science, Manjakkudi",Tiruvarur,Manjakkudi,Arts and Science
-"A.R.J. College of Education, Mannargudi",Tiruvarur,Mannargudi,B.Ed
-"A.R.J. College of Engineering and Technology, Mannargudi",Tiruvarur,Mannargudi,Engineering
-"A.R.J. Institute of Management Studies, Mannargudi",Tiruvarur,Mannargudi,Management
-"A.R.J. Polytechnic College, Mannargudi",Tiruvarur,Mannargudi,Polytechnic
-"Devi College of Education, Mannargudi",Tiruvarur,Mannargudi,B.Ed
-"Mannai Rajagopalaswami Government Arts College, Mannargudi",Tiruvarur,Mannargudi,Arts and Science
-"S.K. Polytechnic College, Mannargudi",Tiruvarur,Mannargudi,Polytechnic
-"S.T.E.T. College of Education for Women, Mannargudi",Tiruvarur,Mannargudi,B.Ed
-"S.T.E.T. Women's College (Sengamala Thayaar Educational Trust), Mannargudi",Tiruvarur,Mannargudi,Arts and Science
-"Government Arts and Science College, Nannilam",Tiruvarur,Nannilam,Arts and Science
+"A.R.J. College of Education, Mannargudi",Thiruvarur,Mannargudi,B.Ed
+"A.R.J. College of Engineering and Technology, Mannargudi",Thiruvarur,Mannargudi,Engineering
+"A.R.J. Institute of Management Studies, Mannargudi",Thiruvarur,Mannargudi,Management
+"A.R.J. Polytechnic College, Mannargudi",Thiruvarur,Mannargudi,Polytechnic
+"Devi College of Education, Mannargudi",Thiruvarur,Mannargudi,B.Ed
+"Mannai Rajagopalaswami Government Arts College, Mannargudi",Thiruvarur,Mannargudi,Arts and Science
+"S.K. Polytechnic College, Mannargudi",Thiruvarur,Mannargudi,Polytechnic
+"S.T.E.T. College of Education for Women, Mannargudi",Thiruvarur,Mannargudi,B.Ed
+"S.T.E.T. Women's College (Sengamala Thayaar Educational Trust), Mannargudi",Thiruvarur,Mannargudi,Arts and Science
+"Government Arts and Science College, Nannilam",Thiruvarur,Nannilam,Arts and Science
 "Government Arts and Science College, Needamangalam",Tiruvarur,Needamangalam,Arts and Science
-"Government Arts and Science College, Thiruthuraipoondi",Tiruvarur,Thiruthuraipoondi,Arts and Science
+"Government Arts and Science College, Thiruthuraipoondi",Thiruvarur,Thiruthuraipoondi,Arts and Science
 "Netaji Subash Chandra Bose College, Tiruvarur",Tiruvarur,Tiruvarur,Arts and Science
 "Nethaji Subash Chandra Bose College of Education, Tiruvarur",Tiruvarur,Tiruvarur,B.Ed
 "Rabiammal Ahamed Maideen College for Women, Tiruvarur",Tiruvarur,Tiruvarur,Arts and Science
