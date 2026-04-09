@@ -89,7 +89,11 @@ try:
     cloud_students = list(students_col.find({}, {"_id": 0}))
     if cloud_students:
         cloud_df = pd.DataFrame(cloud_students)
+        master_df['UMIS number'] = master_df['UMIS number'].astype(str)
         master_df = pd.concat([master_df, cloud_df], ignore_index=True)
+        for col in cloud_df.columns:
+            cloud_df[col] = cloud_df[col].astype(str).str.strip()
+        master_df['UMIS number'] = master_df['UMIS number'].astype(str)
         master_df = master_df.drop_duplicates(subset=['UMIS number'], keep='last')
 except: pass
 
