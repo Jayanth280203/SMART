@@ -16,6 +16,8 @@ class _EmployeeSignupScreenState extends State<EmployeeSignupScreen> {
   final _umisController = TextEditingController();
   final _stuidController = TextEditingController();
   final _nameController = TextEditingController();
+  final _mobileController = TextEditingController();
+  final _emailController = TextEditingController();
   final _dobController = TextEditingController();
   final _degreeController = TextEditingController();
   final _deptController = TextEditingController();
@@ -109,6 +111,7 @@ class _EmployeeSignupScreenState extends State<EmployeeSignupScreen> {
     
     final ctrls = [
       _umisController, _stuidController, _nameController, _dobController,
+      _mobileController, _emailController,
       _degreeController, _deptController, _cgpaController, _yearController,
       _skillsController, _swayamController, _naanController, _certsController,
       _internsController, _extracurrController, _sportsController
@@ -127,6 +130,8 @@ class _EmployeeSignupScreenState extends State<EmployeeSignupScreen> {
       "dob": _dobController.text,
       "district": _selectedDistrict,
       "block": _selectedBlock,
+      "email_id": _emailController.text,
+      "mobile_number": _mobileController.text,
       "college_name": _selectedCollege,
       "degree": _degreeController.text,
       "department": _deptController.text,
@@ -192,6 +197,8 @@ class _EmployeeSignupScreenState extends State<EmployeeSignupScreen> {
                             _field(_stuidController, 'Student ID', Icons.fingerprint_rounded),
                             _field(_nameController, 'Full Professional Name', Icons.person_outline_rounded),
                             _field(_dobController, 'Date of Birth (YYYY-MM-DD)', Icons.calendar_today_rounded, readOnly: true, onTap: _pickDate),
+                            _field(_mobileController, 'Mobile Number', Icons.phone_rounded, kb: TextInputType.phone, format: [FilteringTextInputFormatter.digitsOnly], maxL: 10),
+                            _field(_emailController, 'Email Address', Icons.email_rounded, kb: TextInputType.emailAddress),
                           ]),
                           
                           const SizedBox(height: 32),
