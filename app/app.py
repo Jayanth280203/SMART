@@ -81,21 +81,23 @@ try:
 except Exception as e:
     print(f"WARNING: Could not load new ML models ({e}). Falling back to rule-based logic.")
 
-# Load Master Dataset and Pre-cache data
-master_df = pd.read_csv(MASTER_DATASET).fillna("NONE")
-
-# Cloud Sync for Render Stability
+# --- Load Master Dataset: MongoDB is the single source of truth ---
 try:
+    print("Loading all student data from MongoDB Atlas...")
     cloud_students = list(students_col.find({}, {"_id": 0}))
     if cloud_students:
-        cloud_df = pd.DataFrame(cloud_students)
-        master_df['UMIS number'] = master_df['UMIS number'].astype(str)
-        master_df = pd.concat([master_df, cloud_df], ignore_index=True)
-        for col in cloud_df.columns:
-            cloud_df[col] = cloud_df[col].astype(str).str.strip()
-        master_df['UMIS number'] = master_df['UMIS number'].astype(str)
-        master_df = master_df.drop_duplicates(subset=['UMIS number'], keep='last')
-except: pass
+        master_df = pd.DataFrame(cloud_students)
+        for col in master_df.columns:
+            master_df[col] = master_df[col].astype(str).str.strip()
+        master_df = master_df.fillna('NONE')
+        print(f"Loaded {len(master_df)} student records from MongoDB.")
+    else:
+        # Fallback to CSV if MongoDB is empty
+        print("MongoDB empty — falling back to CSV.")
+        master_df = pd.read_csv(MASTER_DATASET).fillna('NONE')
+except Exception as e:
+    print(f"MongoDB load failed ({e}) — falling back to CSV.")
+    master_df = pd.read_csv(MASTER_DATASET).fillna('NONE')
 
 # Clean columns globally
 for col in master_df.columns:
@@ -430,43 +432,42 @@ def index():
 def signup_employee():
     global master_df
     data = request.json
-    umis = str(data.get('UMIS number'))
-    
-    # Verification using MongoDB
+    umis = str(data.get('UMIS number', '')).strip()
+
+    if not umis:
+        return jsonify({"status": "error", "message": "UMIS number is required"}), 400
+
+    # --- Check duplicate in MongoDB (cloud) ---
     if students_col.find_one({"UMIS number": umis}):
-        return jsonify({"status": "error", "message": "UMIS already exists"}), 400
-    
-    # Map the incoming exact names into user_data expected by get_predictions
+        return jsonify({"status": "error", "message": "UMIS already registered. Please login."}), 400
+
+    # --- Predict job roles ---
     ac_role, sk_role = get_predictions(data)
-    
-    # Data to save
-    user_row = data.copy()
+
+    # --- Build the record to store ---
+    user_row = {k: str(v).strip() for k, v in data.items()}  # all fields as clean strings
+    user_row['UMIS number'] = umis
     user_row['predicted_academic_job_role'] = ac_role
     user_row['predicted_skill_job_role'] = sk_role
-    
-    # Save to MongoDB
+
+    # --- Save to MongoDB Atlas (cloud — permanent) ---
     students_col.insert_one(user_row)
-    
-    # Optional: For analytics to stay fast, we still append to the local MASTER_DATASET 
-    # so employer dashboard doesn't have to query cloud DB for every tile
-    master_row = user_row.copy()
-    if '_id' in master_row: del master_row['_id']
-    if 'pin' in master_row: del master_row['pin']
-        
-    master_row_df = pd.DataFrame([master_row])
-    cols = master_df.columns
-    for col in cols:
-        if col not in master_row_df or str(master_row_df[col].values[0]).strip() == "":
-            master_row_df[col] = 'NONE'
-    
-    master_row_df = master_row_df[cols]
-    master_row_df.to_csv(MASTER_DATASET, mode='a', header=False, index=False)
-    
-    # Update global reference
-    master_df = pd.read_csv(MASTER_DATASET)
-    
+    print(f"[SIGNUP] New student saved to MongoDB: UMIS={umis}, Name={user_row.get('name', '')}")
+
+    # --- Update in-memory master_df so analytics stay fresh immediately ---
+    new_row_clean = {k: v for k, v in user_row.items() if k != '_id'}
+    new_row_df = pd.DataFrame([new_row_clean])
+    # Align columns with master_df
+    for col in master_df.columns:
+        if col not in new_row_df.columns:
+            new_row_df[col] = 'NONE'
+    new_row_df = new_row_df.reindex(columns=master_df.columns, fill_value='NONE')
+    master_df = pd.concat([master_df, new_row_df], ignore_index=True)
+    master_df['UMIS number'] = master_df['UMIS number'].astype(str)
+    master_df = master_df.drop_duplicates(subset=['UMIS number'], keep='last')
+
     return jsonify({
-        "status": "success", 
+        "status": "success",
         "umis": umis,
         "academic": ac_role,
         "skill": sk_role
