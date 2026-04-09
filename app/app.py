@@ -1032,8 +1032,9 @@ def update_employer_profile():
         data = request.json
         original_email = str(data.get('original_email', '')).strip().lower()
         
-        # Pull original out to find the document
-        update_data = {k: v for k, v in data.items() if k != 'original_email'}
+        # Pull original out to find the document. Filter out immutable/unneeded fields.
+        EXCLUDE = ['original_email', '_id']
+        update_data = {k: v for k, v in data.items() if k not in EXCLUDE}
         
         result = employers_col.update_one(
             {"email": original_email},
@@ -1043,6 +1044,7 @@ def update_employer_profile():
         if result.matched_count == 0:
             return jsonify({"status": "error", "message": "Employer not found"}), 404
             
+        print(f"[EMPLOYER] Profile updated for: {original_email}")
         return jsonify({"status": "success"})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500

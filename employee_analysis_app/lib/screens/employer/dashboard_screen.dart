@@ -278,10 +278,10 @@ class _EmployerDashboardScreenState extends State<EmployerDashboardScreen> {
     _loadAnalytics();
   }
 
-  Future<void> _loadEmployerProfile() async {
+  Future<void> _loadEmployerProfile({String? customEmail}) async {
     setState(() => _isProfileLoading = true);
     try {
-      final email = _employerProfile?['email'] ?? widget.email ?? '';
+      final email = customEmail ?? _employerProfile?['email'] ?? widget.email ?? '';
       final data  = await ApiService.getEmployerProfile(email);
       setState(() { _employerProfile = data; _isProfileLoading = false; });
     } catch (_) {
@@ -294,8 +294,11 @@ class _EmployerDashboardScreenState extends State<EmployerDashboardScreen> {
       updated['original_email'] = _employerProfile?['email'];
       final ok = await ApiService.updateEmployerProfile(updated);
       if (ok) {
-        await _loadEmployerProfile();
+        // Use the potentially new email to reload
+        await _loadEmployerProfile(customEmail: updated['email']);
         if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile Updated Successfully')));
+      } else {
+        if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Update failed. This email might already be in use or server error.'), backgroundColor: Colors.red));
       }
     } catch (e) {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
