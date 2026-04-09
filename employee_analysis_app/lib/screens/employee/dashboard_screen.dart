@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:typed_data';
 import 'job_listings_tab.dart';
+import '../role_selection_screen.dart';
 
 class EmployeeDashboardScreen extends StatefulWidget {
   final String umis;
@@ -24,6 +25,8 @@ class _EmployeeDashboardScreenState extends State<EmployeeDashboardScreen> {
   bool _isAnalyzing = false;
   String _analysisResult = "";
   String? _uploadError;
+
+  String _selectedScope = 'state';
 
   @override
   void initState() {
@@ -121,20 +124,27 @@ class _EmployeeDashboardScreenState extends State<EmployeeDashboardScreen> {
                   child: Text(_data!['stats']['user_name']?[0] ?? 'S', style: const TextStyle(color: Color(0xFF6366F1), fontWeight: FontWeight.bold)),
                 ),
                 const SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('SMART COMMAND CENTER', style: GoogleFonts.outfit(color: const Color(0xFF94A3B8), fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.5)),
-                    Text(_data!['stats']['user_name'] ?? 'Scholar', style: GoogleFonts.outfit(color: const Color(0xFF1E293B), fontSize: 22, fontWeight: FontWeight.bold)),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('SMART', style: GoogleFonts.outfit(color: const Color(0xFF94A3B8), fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.5)),
+                      Text(_data!['stats']['user_name'] ?? 'Scholar', style: GoogleFonts.outfit(color: const Color(0xFF1E293B), fontSize: 20, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
           actions: [
             IconButton(
-              onPressed: () => Navigator.pop(context), 
-              icon: Container(
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const RoleSelectionScreen()),
+                  (route) => false,
+                );
+              },              icon: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(color: const Color(0xFFF1F5F9), borderRadius: BorderRadius.circular(12)),
                 child: const Icon(Icons.logout_rounded, color: Color(0xFF64748B), size: 20)
@@ -195,40 +205,75 @@ class _EmployeeDashboardScreenState extends State<EmployeeDashboardScreen> {
             decoration: _premiumCardDecoration(),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundColor: const Color(0xFF6366F1).withOpacity(0.1),
-                      child: Text(profile['name']?[0] ?? '?', style: GoogleFonts.outfit(fontSize: 32, fontWeight: FontWeight.bold, color: const Color(0xFF6366F1))),
-                    ),
-                    const SizedBox(width: 24),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(profile['name'] ?? 'Student', style: GoogleFonts.outfit(fontSize: 26, fontWeight: FontWeight.bold)),
-                          Text('${profile['degree']} in ${profile['department']}', style: GoogleFonts.outfit(color: const Color(0xFF64748B), fontSize: 14)),
-                          const SizedBox(height: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                            decoration: BoxDecoration(color: const Color(0xFF10B981).withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
-                            child: Text('VERIFIED SCHOLAR', style: GoogleFonts.outfit(color: const Color(0xFF10B981), fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: () => _showEditProfileDialog(profile),
-                      icon: const Icon(Icons.edit_note_rounded, size: 18),
-                      label: const Text('Update'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1E293B),
-                        minimumSize: const Size(0, 44),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      ),
-                    ),
-                  ],
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    bool isSmall = constraints.maxWidth < 450;
+                    return isSmall 
+                      ? Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 40,
+                              backgroundColor: const Color(0xFF6366F1).withOpacity(0.1),
+                              child: Text(profile['name']?[0] ?? '?', style: GoogleFonts.outfit(fontSize: 32, fontWeight: FontWeight.bold, color: const Color(0xFF6366F1))),
+                            ),
+                            const SizedBox(height: 16),
+                            Text(profile['name'] ?? 'Student', style: GoogleFonts.outfit(fontSize: 26, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                            Text('${profile['degree']} in ${profile['department']}', style: GoogleFonts.outfit(color: const Color(0xFF64748B), fontSize: 14), textAlign: TextAlign.center),
+                            const SizedBox(height: 12),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(color: const Color(0xFF10B981).withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
+                              child: Text('VERIFIED SCHOLAR', style: GoogleFonts.outfit(color: const Color(0xFF10B981), fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+                            ),
+                            const SizedBox(height: 16),
+                            ElevatedButton.icon(
+                              onPressed: () => _showEditProfileDialog(profile),
+                              icon: const Icon(Icons.edit_note_rounded, size: 18),
+                              label: const Text('Update'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF1E293B),
+                                minimumSize: const Size(double.infinity, 44),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 40,
+                              backgroundColor: const Color(0xFF6366F1).withOpacity(0.1),
+                              child: Text(profile['name']?[0] ?? '?', style: GoogleFonts.outfit(fontSize: 32, fontWeight: FontWeight.bold, color: const Color(0xFF6366F1))),
+                            ),
+                            const SizedBox(width: 24),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(profile['name'] ?? 'Student', style: GoogleFonts.outfit(fontSize: 26, fontWeight: FontWeight.bold), overflow: TextOverflow.visible),
+                                  Text('${profile['degree']} in ${profile['department']}', style: GoogleFonts.outfit(color: const Color(0xFF64748B), fontSize: 14)),
+                                  const SizedBox(height: 8),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                    decoration: BoxDecoration(color: const Color(0xFF10B981).withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
+                                    child: Text('VERIFIED SCHOLAR', style: GoogleFonts.outfit(color: const Color(0xFF10B981), fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ElevatedButton.icon(
+                              onPressed: () => _showEditProfileDialog(profile),
+                              icon: const Icon(Icons.edit_note_rounded, size: 18),
+                              label: const Text('Update'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF1E293B),
+                                minimumSize: const Size(0, 44),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                          ],
+                        );
+                  },
                 ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 20), child: Divider(color: Color(0xFFF1F5F9))),
                 Row(
@@ -244,6 +289,11 @@ class _EmployeeDashboardScreenState extends State<EmployeeDashboardScreen> {
           ),
           const SizedBox(height: 24),
           // Info Sections
+          _profileSection('Contact Information', [
+            _infoRow(Icons.email_rounded, 'EMAIL ADDRESS', profile['email_id'] ?? 'Not provided'),
+            _infoRow(Icons.phone_rounded, 'MOBILE NUMBER', profile['mobile_number'] ?? 'Not provided'),
+          ]),
+          const SizedBox(height: 16),
           _profileSection('Academic Background', [
             _infoRow(Icons.school_rounded, 'INSTITUTION', profile['college_name']),
             _infoRow(Icons.category_rounded, 'DEPARTMENT', profile['department']),
@@ -343,13 +393,27 @@ class _EmployeeDashboardScreenState extends State<EmployeeDashboardScreen> {
                   ],
                 ),
                 const SizedBox(height: 32),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _predictionRing('ACADEMIC PATH', _data!['predictions']['academic']),
-                    const SizedBox(width: 24),
-                    _predictionRing('SKILL ALIGNMENT', _data!['predictions']['skill'], CrossAxisAlignment.end),
-                  ],
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    bool isSmall = constraints.maxWidth < 400;
+                    return isSmall 
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _predictionRing('ACADEMIC PATH', _data!['predictions']['academic']),
+                            const SizedBox(height: 20),
+                            _predictionRing('SKILL ALIGNMENT', _data!['predictions']['skill']),
+                          ],
+                        )
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _predictionRing('ACADEMIC PATH', _data!['predictions']['academic']),
+                            const SizedBox(width: 24),
+                            _predictionRing('SKILL ALIGNMENT', _data!['predictions']['skill'], CrossAxisAlignment.end),
+                          ],
+                        );
+                  },
                 ),
               ],
             ),
@@ -365,41 +429,38 @@ class _EmployeeDashboardScreenState extends State<EmployeeDashboardScreen> {
             ],
           ),
           const SizedBox(height: 24),
-          // Chart
-          Container(
-            height: 380,
-            padding: const EdgeInsets.all(24),
-            decoration: _premiumCardDecoration(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('CGPA Performance Benchmark', style: GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 16)),
-                Text('Your performance relative to state-wide peers', style: GoogleFonts.outfit(color: const Color(0xFF94A3B8), fontSize: 12)),
-                const Expanded(child: SizedBox(height: 40)),
-                Expanded(
-                  flex: 8,
-                  child: BarChart(
-                    BarChartData(
-                      gridData: FlGridData(show: true, drawVerticalLine: false, getDrawingHorizontalLine: (v) => FlLine(color: const Color(0xFFF1F5F9), strokeWidth: 1)),
-                      borderData: FlBorderData(show: false),
-                      barGroups: [
-                        BarChartGroupData(x: 0, barRods: [BarChartRodData(toY: _data!['stats']['user_cgpa'].toDouble(), color: const Color(0xFF6366F1), width: 45, borderRadius: const BorderRadius.vertical(top: Radius.circular(8)))]),
-                        BarChartGroupData(x: 1, barRods: [BarChartRodData(toY: _data!['stats']['avg_peer_cgpa'].toDouble(), color: const Color(0xFFE2E8F0), width: 45, borderRadius: const BorderRadius.vertical(top: Radius.circular(8)))]),
-                      ],
-                      titlesData: FlTitlesData(
-                        show: true,
-                        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                        rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                        bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, getTitlesWidget: (v, m) {
-                          final labels = ['YOUR SCORE', 'PEER AVG'];
-                          return Padding(padding: const EdgeInsets.only(top: 10), child: Text(labels[v.toInt()], style: GoogleFonts.outfit(color: const Color(0xFF94A3B8), fontWeight: FontWeight.bold, fontSize: 10)));
-                        })),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          // Filter and Charts
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Peer Comparison', style: GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 16)),
+              DropdownButton<String>(
+                value: _selectedScope,
+                underline: const SizedBox(),
+                icon: const Icon(Icons.keyboard_arrow_down_rounded, color: Color(0xFF6366F1)),
+                style: GoogleFonts.outfit(fontWeight: FontWeight.bold, color: const Color(0xFF6366F1), fontSize: 13),
+                items: ['state', 'district', 'block', 'college'].map((s) => DropdownMenuItem(value: s, child: Text('${s.toUpperCase()} WIDE'))).toList(),
+                onChanged: (val) {
+                  if (val != null) setState(() => _selectedScope = val);
+                },
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          // Academic Chart
+          _buildBarChart(
+            'Academic Performance (CGPA)',
+            'Your performance relative to $_selectedScope peers',
+            (_data?['stats']?['user_cgpa'] ?? 0).toDouble(),
+            (_data?['stats_advanced']?[_selectedScope]?['avg_cgpa'] ?? _data?['stats']?['avg_peer_cgpa'] ?? 7.5).toDouble(),
+          ),
+          const SizedBox(height: 24),
+          // Skill Chart
+          _buildBarChart(
+            'Skill Depth Benchmark',
+            'Your skill count relative to $_selectedScope peers',
+            (_data?['stats']?['user_skill_score'] ?? 0).toDouble(),
+            (_data?['stats_advanced']?[_selectedScope]?['avg_skill'] ?? 3.0).toDouble(),
           ),
           const SizedBox(height: 48),
         ],
@@ -407,19 +468,55 @@ class _EmployeeDashboardScreenState extends State<EmployeeDashboardScreen> {
     );
   }
 
-  Widget _predictionRing(String label, String value, [CrossAxisAlignment align = CrossAxisAlignment.start]) => Expanded(
-    child: Column(
-      crossAxisAlignment: align,
-      children: [
-        Text(label, style: GoogleFonts.outfit(color: Colors.white.withOpacity(0.7), fontWeight: FontWeight.bold, fontSize: 9, letterSpacing: 1)),
-        const SizedBox(height: 4),
-        Text(
-          value, 
-          style: GoogleFonts.outfit(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 17, height: 1.2), 
-          textAlign: align == CrossAxisAlignment.end ? TextAlign.right : TextAlign.left,
-        ),
-      ],
-    ),
+  Widget _buildBarChart(String title, String subtitle, double userScore, double peerScore) {
+    return Container(
+      height: 300,
+      padding: const EdgeInsets.all(24),
+      decoration: _premiumCardDecoration(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 16)),
+          Text(subtitle, style: GoogleFonts.outfit(color: const Color(0xFF94A3B8), fontSize: 12)),
+          const Expanded(child: SizedBox(height: 40)),
+          Expanded(
+            flex: 8,
+            child: BarChart(
+              BarChartData(
+                gridData: FlGridData(show: true, drawVerticalLine: false, getDrawingHorizontalLine: (v) => FlLine(color: const Color(0xFFF1F5F9), strokeWidth: 1)),
+                borderData: FlBorderData(show: false),
+                barGroups: [
+                  BarChartGroupData(x: 0, barRods: [BarChartRodData(toY: userScore, color: const Color(0xFF6366F1), width: 35, borderRadius: const BorderRadius.vertical(top: Radius.circular(8)))]),
+                  BarChartGroupData(x: 1, barRods: [BarChartRodData(toY: peerScore, color: const Color(0xFFE2E8F0), width: 35, borderRadius: const BorderRadius.vertical(top: Radius.circular(8)))]),
+                ],
+                titlesData: FlTitlesData(
+                  show: true,
+                  topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, getTitlesWidget: (v, m) {
+                    final labels = ['YOUR SCORE', 'PEER AVG'];
+                    return Padding(padding: const EdgeInsets.only(top: 10), child: Text(labels[v.toInt()], style: GoogleFonts.outfit(color: const Color(0xFF94A3B8), fontWeight: FontWeight.bold, fontSize: 10)));
+                  })),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _predictionRing(String label, String value, [CrossAxisAlignment align = CrossAxisAlignment.start]) => Column(
+    crossAxisAlignment: align,
+    children: [
+      Text(label, style: GoogleFonts.outfit(color: Colors.white.withOpacity(0.7), fontWeight: FontWeight.bold, fontSize: 9, letterSpacing: 1)),
+      const SizedBox(height: 4),
+      Text(
+        value, 
+        style: GoogleFonts.outfit(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 17, height: 1.2), 
+        textAlign: align == CrossAxisAlignment.end ? TextAlign.right : TextAlign.left,
+      ),
+    ],
   );
 
   Widget _skillBox(String title, dynamic items, Color color) => Container(

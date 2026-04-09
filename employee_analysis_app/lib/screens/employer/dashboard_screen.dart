@@ -3,6 +3,7 @@ import '../../services/api_service.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:ui' as ui;
+import '../role_selection_screen.dart';
 
 class MapDataModel {
   MapDataModel(this.name, this.count, this.percentage, this.color);
@@ -397,7 +398,12 @@ class _EmployerDashboardScreenState extends State<EmployerDashboardScreen> {
         )),
         Padding(padding: const EdgeInsets.all(24),
           child: InkWell(
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => const RoleSelectionScreen()),
+                (route) => false,
+              );
+            },
             borderRadius: BorderRadius.circular(12),
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -1075,6 +1081,8 @@ class _EmployerDashboardScreenState extends State<EmployerDashboardScreen> {
             Flexible(child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: Column(children: [
+                _detailRow(Icons.email_rounded,            'EMAIL ID',                 d['email_id'] ?? 'Not provided'),
+                _detailRow(Icons.phone_rounded,            'MOBILE NUMBER',            d['mobile_number'] ?? 'Not provided'),
                 _detailRow(Icons.school_rounded,           'INSTITUTION',              d['college_name']),
                 _detailRow(Icons.workspace_premium_rounded,'ACADEMIC DEGREE',          d['degree']),
                 _detailRow(Icons.category_rounded,         'DEPARTMENT',               d['department']),

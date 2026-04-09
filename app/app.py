@@ -83,6 +83,16 @@ except Exception as e:
 
 # Load Master Dataset and Pre-cache data
 master_df = pd.read_csv(MASTER_DATASET).fillna("NONE")
+
+# Cloud Sync for Render Stability
+try:
+    cloud_students = list(students_col.find({}, {"_id": 0}))
+    if cloud_students:
+        cloud_df = pd.DataFrame(cloud_students)
+        master_df = pd.concat([master_df, cloud_df], ignore_index=True)
+        master_df = master_df.drop_duplicates(subset=['UMIS number'], keep='last')
+except: pass
+
 # Clean columns globally
 for col in master_df.columns:
     master_df[col] = master_df[col].astype(str).str.strip().replace('', 'NONE')
@@ -512,6 +522,45 @@ def employee_dashboard(umis):
             avg_cgpa = float(peers['cgpa'].mean()) if len(peers) > 0 else 7.5
         except:
             avg_cgpa = 7.5
+            
+        user_district = str(user_data.get('district', '')).strip()
+        user_block = str(user_data.get('block', '')).strip()
+        user_college = str(user_data.get('college_name', '')).strip()
+
+        peers_state = peers
+        peers_district = peers[peers['district'] == user_district] if user_district else pd.DataFrame()
+        peers_block = peers[(peers['district'] == user_district) & (peers['block'] == user_block)] if user_block else pd.DataFrame()
+        peers_college = peers[peers['college_name'] == user_college] if user_college else pd.DataFrame()
+
+        def safe_mean(df, col):
+            try: return float(df[col].mean()) if len(df) > 0 else 0.0
+            except: return 0.0
+
+        def get_avg_skill(df):
+            if len(df) == 0: return 0.0
+            total = sum(len([x for x in str(s).split(',') if x.strip()]) for s in df['skills'].dropna())
+            return float(total / len(df))
+
+        user_skill_score = len([x for x in str(user_data.get('skills', '')).split(',') if x.strip()])
+        
+        stats_advanced = {
+            "state": {
+                "avg_cgpa": round(safe_mean(peers_state, 'cgpa') or 7.5, 2),
+                "avg_skill": round(get_avg_skill(peers_state) or 3.0, 2),
+            },
+            "district": {
+                "avg_cgpa": round(safe_mean(peers_district, 'cgpa') or 7.5, 2),
+                "avg_skill": round(get_avg_skill(peers_district) or 3.0, 2),
+            },
+            "block": {
+                "avg_cgpa": round(safe_mean(peers_block, 'cgpa') or 7.5, 2),
+                "avg_skill": round(get_avg_skill(peers_block) or 3.0, 2),
+            },
+            "college": {
+                "avg_cgpa": round(safe_mean(peers_college, 'cgpa') or 7.5, 2),
+                "avg_skill": round(get_avg_skill(peers_college) or 3.0, 2),
+            }
+        }
         
         try:
             user_cgpa = float(user_data.get('cgpa', 0) or 0)
@@ -577,6 +626,7 @@ def employee_dashboard(umis):
             "analysis": {"advantages": advantages, "disadvantages": disadvantages},
             "stats": {
                 "user_cgpa": user_cgpa,
+                "user_skill_score": user_skill_score,
                 "avg_peer_cgpa": float(f"{avg_cgpa:.2f}"),
                 "total_peers": len(peers),
                 "user_name": str(user_data.get('name', '')),
@@ -584,6 +634,7 @@ def employee_dashboard(umis):
                 "user_college": str(user_data.get('college_name', '')),
                 "user_skills": str(user_data.get('skills', ''))
             },
+            "stats_advanced": stats_advanced,
             "full_profile": sanitize_data(user_data) # Send all 18+ fields safely
         })
     except Exception as e:

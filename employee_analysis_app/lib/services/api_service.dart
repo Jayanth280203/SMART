@@ -7,12 +7,16 @@ class ApiService {
   static String get baseUrl => kIsWeb ? '' : 'https://smart-zzhm.onrender.com';
 
   static Future<Map<String, dynamic>> loginEmployee(String umis, String dob) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/api/login/employee'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'umis': umis, 'dob': dob}),
-    );
-    return jsonDecode(response.body);
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/api/login/employee'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'umis': umis, 'dob': dob}),
+      ).timeout(const Duration(seconds: 45)); // Increased timeout for Render cold start
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {'status': 'error', 'message': 'Server is waking up or unreachable. Please try again in 30 seconds.'};
+    }
   }
 
   static Future<Map<String, dynamic>> signupEmployee(Map<String, dynamic> data) async {
